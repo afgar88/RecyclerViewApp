@@ -6,39 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".views.FirstFragment">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
-    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_event"
-            android:layout_width="88dp"
-            android:layout_height="114dp"
-            android:backgroundTint="@color/teal_700"
-            android:src="@drawable/ic_baseline_add_24"
-            app:layout_constraintBottom_toBottomOf="@+id/my_recycler"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.907"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/my_recycler"
-            app:layout_constraintVertical_bias="0.959"
-
-            />-->
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:fabSize="normal"
+        android:backgroundTint="@color/blue"
         app:layout_constraintBottom_toBottomOf="@+id/my_recycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.904"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.96"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
+        app:srcCompat="@drawable/ic_baseline_add_24white" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

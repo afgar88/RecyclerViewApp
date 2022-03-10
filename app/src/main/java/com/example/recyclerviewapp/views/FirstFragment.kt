@@ -1,5 +1,6 @@
 package com.example.recyclerviewapp.views
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,9 +10,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclerviewapp.R
 import com.example.recyclerviewapp.adapter.EventAdapter
+import com.example.recyclerviewapp.adapter.EventListener
 import com.example.recyclerviewapp.databinding.FragmentFirstBinding
 import com.example.recyclerviewapp.fragmentNavigation
 import com.example.recyclerviewapp.model.Event
+import com.example.recyclerviewapp.model.Events
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,14 +31,19 @@ class FirstFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    var counter=0
+    lateinit var eventList: EventListener
 
     private val binding by lazy {
         FragmentFirstBinding.inflate(layoutInflater)
     }
 
     private val eventAdapter by lazy {
-        EventAdapter()
+        EventAdapter(eventList)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        eventList = activity as EventListener
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,29 +52,27 @@ class FirstFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        for (i in 0 until Events.size) {
+            eventAdapter.updateEventData(Events[i])
+        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding.myRecycler.apply {
-            layoutManager=LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
-            adapter=eventAdapter
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter = eventAdapter
         }
 
-        binding.addEvent.setOnClickListener{
+        binding.addEvent.setOnClickListener {
             fragmentNavigation(
                 supportFragmentManager = requireActivity().supportFragmentManager,
-                SecondFragment.newInstance("","")
+                SecondFragment.newInstance("", "")
             )
         }
-
-    /*    binding.addEvent.setOnClickListener{
-            eventAdapter.updateEventData(Event("CLASS $counter","ANY","03/07/22"))
-            counter++
-        }*/
 
         return binding.root
     }
@@ -82,10 +88,11 @@ class FirstFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(newEvent: Event? =null) =
+        fun newInstance(param1: String, param2: String) =
             FirstFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable("myEvent",newEvent)
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
                 }
             }
     }

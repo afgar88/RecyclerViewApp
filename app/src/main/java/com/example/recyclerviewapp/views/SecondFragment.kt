@@ -81,7 +81,6 @@ class SecondFragment : Fragment() {
                 Event("${binding.eventTitleEt.text}", "${binding.eventCategoryEt.text}", date)
             Events.add(event)
 
-            binding.textViewDate.text = dateFormatter.format(calendar.time).toString()
             fragmentNavigation(
                 supportFragmentManager = requireActivity().supportFragmentManager,
                 FirstFragment.newInstance("", "")

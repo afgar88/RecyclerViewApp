@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity(), EventListener {
 
 
         if (savedInstanceState == null) {
-            fragmentNavigation(supportFragmentManager, FirstFragment.newInstance("", ""))
+            fragmentNavigation(supportFragmentManager, FirstFragment.newInstance())
         }
     }
 
